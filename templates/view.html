@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>공지사항</title>
+    <link rel="stylesheet" href="../static/css/css.css">
+</head>
+
+<body>
+    <div class="board_wrap">
+        <div class="board_title">
+            <strong>공지사항</strong>
+            <p>공지사항을 빠르고 정확하게 안내해드립니다.</p>
+        </div>
+        <form action="/edit">
+        <div class="board_view_wrap">
+            {% for i in data %}
+            <div class="board_view">
+                <div class="title">
+                    {{ i[1] }}
+                </div>
+                <div class="info">
+                    <dl>
+                        <dt>번호</dt>
+                        <dd>{{ i[0] }}</dd>
+                    </dl>
+                    <dl>
+                        <dt>글쓴이</dt>
+                        <dd>{{ i[2] }}</dd>
+                    </dl>
+                    <dl>
+                        <dt>작성일</dt>
+                        <dd>{{ i[5] }}</dd>
+                    </dl>
+                    <dl>
+                        <dt>지역</dt>
+                        <dd>{{ i[4] }}</dd>
+                    </dl>
+                </div>
+                <div class="cont">
+                    {{ i[3] }}
+                </div>
+            </div>
+            {% endfor %}
+            <div class="bt_wrap">
+                <a href="/" class="on">목록</a>
+                <button type="submit">수정</button>
+                <!-- <a href="/">취소</a> -->
+            </div>
+        </div>
+        </form>
+    </div>
+</body>
+
+</html>

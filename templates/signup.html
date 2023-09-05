@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ssg_project_01</title>
+    <link rel="stylesheet" href="css/css.css">
+</head>
+
+<body class="board_wrap">
+    <header>
+        <h1>한걸음 대여소</h1>
+    </header>
+    <!-- <img class="index-banner" src="index_banner_01.jpg" style="width: 100%; height: auto;" /> -->
+    <main>
+        <div>
+            
+            <div class="ec-base-table typeWrite">
+                <table border="1" summary="">
+                    <caption>회원가입</caption>
+                    <colgroup>
+                        <col style="width:150px;">
+                        <col style="width:auto;">
+                    </colgroup>
+                    <h3 class=" ">기본정보</h3>
+                    <div class="ec-base-table typeWrite">
+                        <table border="1" summary="">
+                            <colgroup>
+                                <col style="width:150px;">
+                                <col style="width:auto;">
+                            </colgroup>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">아이디</th>
+                                    <td><input id="member_id" name="member_id"
+                                            fw-filter="isFill&amp;isFill&amp;isMin[4]&amp;isMax[16]&amp;isIdentity"
+                                            fw-label="아이디" fw-msg="" class="inputTypeText" placeholder="" value=""
+                                            type="text">
+                                        <span id="idMsg"></span> (영문소문자/숫자, 4~16자)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">비밀번호 </th>
+                                    <td>
+                                        <div class="eTooltip">
+                                            <input id="passwd" name="passwd"
+                                                fw-filter="isFill&amp;isMin[4]&amp;isMax[16]" fw-label="비밀번호" fw-msg=""
+                                                autocomplete="off" maxlength="16" 0="disabled" value="" type="password">
+                                            <div class="ec-base-tooltip typeUpper">
+
+                                                <span class="edge"></span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">비밀번호 확인</th>
+                                    <td><input id="user_passwd_confirm" name="user_passwd_confirm"
+                                            fw-filter="isFill&amp;isMatch[passwd]" fw-label="비밀번호 확인"
+                                            fw-msg="비밀번호가 일치하지 않습니다." autocomplete="off" maxlength="16" 0="disabled"
+                                            value="" type="password"> <span id="pwConfirmMsg"></span> </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" id="nameTitle">이름</th>
+                                    <td>
+
+                                        <input id="userid">
+                                    </td>
+                                </tr>
+
+                                <tr class="">
+                                    <th scope="row">휴대전화
+                                    </th>
+                                    <td>
+                                        <select id="mobile1" name="mobile[]" fw-filter="isNumber&amp;isFill"
+                                            fw-label="휴대전화" fw-alone="N" fw-msg="">
+                                            <option value="010">010</option>
+                                            <option value="011">011</option>
+                                            <option value="016">016</option>
+                                            <option value="017">017</option>
+                                            <option value="018">018</option>
+                                            <option value="019">019</option>
+                                        </select>-<input id="mobile2" name="mobile[]" maxlength="4"
+                                            fw-filter="isNumber&amp;isFill" fw-label="휴대전화" fw-alone="N" fw-msg=""
+                                            placeholder="" value="" type="text">-<input id="mobile3" name="mobile[]"
+                                            maxlength="4" fw-filter="isNumber&amp;isFill" fw-label="휴대전화" fw-alone="N"
+                                            fw-msg="" placeholder="" value="" type="text">
+                                    </td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+            </div>
+            <div class="bt_wrap">
+                <button type="submit">
+                    회원가입
+                </button>
+                <button type="submit">취소</button>
+        </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 한걸음

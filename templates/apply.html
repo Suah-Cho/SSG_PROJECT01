@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ssg_project_01</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <header>
+        <h1>한걸음 대여소</h1>
+    </header>
+    <!-- <img class="index-banner" src="index_banner_01.jpg" style="width: 100%; height: auto;" /> -->
+    <main>
+        <div class="xans-element- xans-member xans-member-join">
+            
+            <div class="ec-base-table typeWrite">
+                <table border="1" summary="">
+                    <caption>신청하기</caption>
+                    <colgroup>
+                        <col style="width:150px;">
+                        <col style="width:auto;">
+                    </colgroup>
+                    <div class="ec-base-table typeWrite">
+                        <table border="1" summary="">
+                            <colgroup>
+                                <col style="width:150px;">
+                                <col style="width:auto;">
+                            </colgroup>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">아이디</th>
+                                    <td><input id="member_id" name="member_id"
+                                            fw-filter="isFill&amp;isFill&amp;isMin[4]&amp;isMax[16]&amp;isIdentity"
+                                            fw-label="아이디" fw-msg="" class="inputTypeText" placeholder="" value=""
+                                            type="text">
+                                        <span id="idMsg"></span> (영문소문자/숫자, 4~16자)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" id="nameTitle">이름</th>
+                                    <td>
+
+                                        <input id="userid">
+                                    </td>
+                                </tr>
+
+                                <tr class="">
+                                    <th scope="row">휴대전화
+                                    </th>
+                                    <td>
+                                        <select id="mobile1" name="mobile[]" fw-filter="isNumber&amp;isFill"
+                                            fw-label="휴대전화" fw-alone="N" fw-msg="">
+                                            <option value="010">010</option>
+                                            <option value="011">011</option>
+                                            <option value="016">016</option>
+                                            <option value="017">017</option>
+                                            <option value="018">018</option>
+                                            <option value="019">019</option>
+                                        </select>-<input id="mobile2" name="mobile[]" maxlength="4"
+                                            fw-filter="isNumber&amp;isFill" fw-label="휴대전화" fw-alone="N" fw-msg=""
+                                            placeholder="" value="" type="text">-<input id="mobile3" name="mobile[]"
+                                            maxlength="4" fw-filter="isNumber&amp;isFill" fw-label="휴대전화" fw-alone="N"
+                                            fw-msg="" placeholder="" value="" type="text">
+                                    </td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+            </div>
+            <div class="ec-base-button">
+                <button>
+                    신청하기
+                </button>
+                <button>
+                    취소
+                </button>
+        </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 한걸음

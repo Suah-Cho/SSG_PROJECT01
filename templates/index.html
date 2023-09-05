@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ssg_project_01</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>한걸음 대여소</h1>
+    </header>
+    <img class="index-banner" src="index_banner_01.jpg" style="width: 100%; height: auto;"/>
+    <main>
+        <section id="board">
+            <h2>게시판</h2>
+            <!-- 검색 기능 -->
+            <form id="search-form">
+              <input type="text" id="search" name="search" placeholder="검색어를 입력하세요">
+              <button type="submit">검색</button>
+            </form>
+            <!-- 게시글 목록 표시 -->
+            <ul>
+                <li>
+                    <h3>게시글 제목 1</h3>
+                    <p>게시글 내용 1...</p>
+                </li>
+                <li>
+                    <h3>게시글 제목 2</h3>
+                    <p>게시글 내용 2...</p>
+                </li>
+                <!-- 추가적인 게시글은 여기에 추가 -->
+            </ul>
+        </section>
+
+        <section id="login-form">
+            <h2>로그인</h2>
+            <form action="login.php" method="POST">
+                <input type="text" id="username" name="username" placeholder = "아이디" required>
+                <input type="password" id="password" name="password" placehoder = "비밀번호" required>
+
+                <button type="submit">로 그 인</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 한걸음

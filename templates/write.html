@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>공지사항</title>
+    <link rel="stylesheet" href="../static/css/css.css">
+</head>
+
+<body>
+    <div class="board_wrap">
+        <div class="board_title">
+            <strong>공지사항</strong>
+            <p>공지사항을 빠르고 정확하게 안내해드립니다.</p>
+        </div>
+        <form action='/write' method='POST'>
+            <div class="board_write_wrap">
+                <div class="board_write">
+                    <div class="title">
+                        <dl>
+                            <dt>제목</dt>
+                            <dd><input type="text" placeholder="제목 입력" required name='title'></dd>
+                        </dl>
+                    </div>
+                    <div class="info">
+                        <dl>
+                            <dt>글쓴이</dt>
+                            <dd><input type="text" placeholder="글쓴이 입력" required name='username'></dd>
+                        </dl>
+                        <dl>
+                            <dt>지역</dt>
+                            <dd><input type="text" placeholder="지역 입력" name='userlocation'></dd>
+                        </dl>
+                    </div>
+                    <div class="cont">
+                        <textarea name='body' placeholder="내용 입력"></textarea>
+                    </div>
+                </div>
+                <!-- <button class="bt_wrap" type="submit">등록</button> -->
+                <div class="bt_wrap">
+                    <!-- <input type="submit" value="등록"> -->
+                    <button type="submit" class="on">등록</button>
+                    <a href="/">취소</a>
+                </div>
+        </form>
+
+        <!-- <form action="/write">
+                <div class="bt_wrap">
+                    <button type="submit">등록</button>
+                </div>
+            </form> -->
+    </div>
+    </div>
+</body>
+
+</html>
