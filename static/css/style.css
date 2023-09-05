@@ -17,6 +17,13 @@ a {
     color: inherit;
 }
 
+textarea {
+    width: 100%;
+    height: 20em;
+    border: none;
+    resize: none;
+  }
+
 .board_wrap {
     width: 1000px;
     margin: 100px auto;
