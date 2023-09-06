@@ -13,8 +13,16 @@ cursor = db.cursor()
 
 
 app = Flask(__name__)
+# @app.route('/', defaults={'page':1})
+@app.route('/')
+def list() :
 
-@app.route('/', defaults={'page':1})
+    cursor.execute("SELECT b.boardId, b.title, u.ID, b.location, date_format(b.createAt, '%Y-%m-%d') FROM board as b LEFT OUTER JOIN user as u on u.userId = b.userId ORDER BY b.createAt DESC LIMIT 0, 3;")
+    data_list = cursor.fetchall()
+
+    return render_template("index.html", data_list = data_list)
+
+@app.route('/list', defaults={'page':1})
 @app.route('/list/<int:page>')
 def paging(page) :
     print(page)
@@ -22,9 +30,19 @@ def paging(page) :
     perpage = 10
     startat=(page-1)*perpage
     cursor.execute("SELECT b.boardId, b.title, u.ID, b.location, date_format(b.createAt, '%Y-%m-%d') FROM Board as b LEFT OUTER JOIN User as u on u.userId = b.userId WHERE b.status = 'active' ORDER BY b.createAt DESC LIMIT "+str(startat)+", "+str(perpage)+";")
-    data_list = list(cursor.fetchall())
+    data_list = cursor.fetchall()
 
     return render_template("list.html", data_list = data_list)
+
+@app.route('/listview/<int:id>')    
+def view2(id) :
+    print("id = ", id)
+    cursor.execute("SELECT b.boardId, b.title, u.ID, b.content, b.location, date_format(b.createAt, '%Y-%m-%d') FROM Board as b LEFT OUTER JOIN User as u on u.userId = b.userId WHERE boardId = {} ORDER BY b.createAt DESC;".format(id))
+    data = cursor.fetchall()
+    print(data)
+
+    return render_template("view.html", data = data)
+
 
 @app.route('/edit/')
 def edit() :
@@ -40,14 +58,6 @@ def view() :
 
     return render_template("view.html", data = data)
 
-@app.route('/listview/<int:id>')    
-def view2(id) :
-    print("id = ", id)
-    cursor.execute("SELECT b.boardId, b.title, u.ID, b.content, b.location, date_format(b.createAt, '%Y-%m-%d') FROM Board as b LEFT OUTER JOIN User as u on u.userId = b.userId WHERE boardId = {} ORDER BY b.createAt DESC;".format(id))
-    data = cursor.fetchall()
-    print(data)
-
-    return render_template("view.html", data = data)
 
 
 
@@ -69,7 +79,9 @@ def write() :
 
         return redirect(url_for('view'))
 
-
+@app.route('/signup')
+def signup() :
+    return render_template('signup.html')
 
 
 def main() :

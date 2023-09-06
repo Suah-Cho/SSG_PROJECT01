@@ -4,11 +4,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>공지사항</title>
+    <title>One Step</title>
     <link rel="stylesheet" href="../static/css/css.css">
 </head>
 
 <body>
+    <header class="header">
+        <div class="header_logo">
+            <a href="/">
+                <h1>한걸음 대여소</h1>
+                <p>SLOGAN</p>
+            </a>
+        </div>
+        <div class="header_gnb">
+            <a href='/list'>공지사항</a>
+            <!-- <li><a href='../templates/login.html'>로그인</a></li> -->
+        </div>
+    </header>
     <div class="board_wrap">
         <div class="board_title">
             <strong>공지사항</strong>
@@ -22,11 +34,10 @@
                     <div class="writer">글쓴이</div>
                     <div class="writer">지역</div>
                     <div class="date">작성일</div>
-                    <!-- <div class="count">조회</div> -->
                 </div>
                 {% for i in data_list %}
                 <div>
-                    <div name="boardId"class="num">{{ i[0] }}</div>
+                    <div class="num">{{ i[0] }}</div>
                     <div class="title" onclick="location.href='/listview/{{i[0]}}'">{{ i[1] }}</a></div>
                     <div class="writer">{{ i[2] }}</div>
                     <div class="count">{{ i[3] }}</div>
@@ -45,23 +56,14 @@
                 << </a>
                     <a href="#" class="bt prev">
                         < </a>
-                            <a href="/" class="num">1</a>
+                            <a href="/list" class="num">1</a>
                             <a href="/list/2" class="num">2</a>
                             <a href="/list/3" class="num">3</a>
                             <a href="/list/4" class="num">4</a>
                             <a href="/list/5" class="num">5</a>
-                            <a href="/list/6" class="num">6</a>
-                            <a href="/list/7" class="num">7</a>
                             <a href="#" class="bt next">></a>
                             <a href="#" class="bt last">>></a>
         </div>
-
-        <!-- <a href="write.html" >등록</a> -->
-        <!-- <form action="/write">
-                <div class="bt_wrap">
-                    <button type="submit">등록</button>
-                </div>
-            </form> -->
         <div class="bt_wrap">
             <a href="/write" class="on">등록하기</a>
         </div>
