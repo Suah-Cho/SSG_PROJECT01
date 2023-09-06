@@ -137,12 +137,13 @@ textarea {
     /* align-items: center; */
 }
 
+
 .signup {
-    width: 300px;
+    width: 15%;
     /* border: 4px solid #000; */
     position: relative;
     text-align: center;
-    margin-left: 600px;
+    margin-left: 42%;
     /* justify-content: center; */
 }
 
