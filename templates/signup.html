@@ -21,28 +21,43 @@
             <!-- <li><a href='../templates/login.html'>로그인</a></li> -->
         </div>
     </header>
+    <form method="POST" action="/signup" id="signupForm">
     <div class="signup">
         <h1>SignUp</h1>
         <div class="signup_info">
             <h2>아이디</h2>
-            <input type="text" name="member_id" placeholder="아이디" required>
-            <p>영문소문자+숫자/4~16자리</p>
+            <!-- <input type="text" placeholder="아이디" required name="ID"> -->
+            <input id="ID" name="ID"
+                fw-filter="isFill&amp;isFill&amp;isMin[4]&amp;isMax[16]&amp;isIdentity"
+                fw-label="아이디" fw-msg="" class="inputTypeText" placeholder="" value="{{ID}}"
+                type="text" required>
+            <p>영문소문자+숫자 / 4~16자리</p>
             
             <h2>비밀번호</h2>
-            <input type="text" name="passwd" placeholder="비밀번호" required>
+            <!-- <input type="text" placeholder="비밀번호" required name="passwd"> -->
+            <input id="password" name="password"
+                    fw-filter="isFill&amp;isMin[4]&amp;isMax[16]" fw-label="비밀번호" fw-msg=""
+                    autocomplete="off" maxlength="16" 0="disabled" value="{{password}}" type="password" required>
             
             <h2>비밀번호 확인</h2>
-            <input type="text" name="user_passwd_confirm" placeholder="비밀번호 확인" required>
-            
+            <!-- <input type="text" placeholder="비밀번호 확인" required name="password_confirm"> -->
+            <input id="password_confirm" name="password_confirm"
+                fw-filter="isFill&amp;isMatch[passwd]" fw-label="비밀번호 확인"
+                fw-msg="비밀번호가 일치하지 않습니다." autocomplete="off" maxlength="16" 0="disabled"
+                value="{{password_confirm}}" type="password" required>
+
             <h2>이름</h2>
-            <input type="text" name="userid" placeholder="비밀번호 확인" required>
-            
+            <!-- <input type="text" placeholder="비밀번호 확인" required name="name"> -->
+            <input name="name" type="text" value='{{name}}' required />
+
             <h2>휴대전화</h2>
-            <input type="text" name="mobile" placeholder="휴대전화" required>
+            <!-- <input type="text" placeholder="휴대전화" required name="phoneNumber"> -->
+            <input name="phoneNumber" type="text" value='{{phoneNumber}}' required />
             <p>'-'없이 숫자만 입력해주세요.</p>
         </div>
+    </form>
         <div class="bt_wrap">
-            <button type="submit" class="on">SignUp</button>
+            <button type="submit" class="on" form="signupForm">SignUp</button>
             <button type="submit">Cancel</button>
         </div>
     </div>
@@ -50,3 +65,52 @@
 </body>
 
 </html>
+
+<!-- <tbody>
+    <tr>
+        <th scope="row">아이디</th>
+        <td><input id="ID" name="ID"
+                fw-filter="isFill&amp;isFill&amp;isMin[4]&amp;isMax[16]&amp;isIdentity"
+                fw-label="아이디" fw-msg="" class="inputTypeText" placeholder="" value="{{ID}}"
+                type="text" required>
+            <span id="idMsg"></span> (영문소문자/숫자, 4~16자)
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">비밀번호 </th>
+        <td>
+            <div class="eTooltip">
+                <input id="password" name="password"
+                    fw-filter="isFill&amp;isMin[4]&amp;isMax[16]" fw-label="비밀번호" fw-msg=""
+                    autocomplete="off" maxlength="16" 0="disabled" value="{{password}}" type="password" required>
+                <div class="ec-base-tooltip typeUpper">
+
+                    <span class="edge"></span>
+                </div>
+            </div>
+        </td>
+    </tr>
+            
+    <tr>
+        <th scope="row">비밀번호 확인</th>
+        <td><input id="password_confirm" name="password_confirm"
+                fw-filter="isFill&amp;isMatch[passwd]" fw-label="비밀번호 확인"
+                fw-msg="비밀번호가 일치하지 않습니다." autocomplete="off" maxlength="16" 0="disabled"
+                value="{{password_confirm}}" type="password" required> <span id="pwConfirmMsg"></span> </td>
+    </tr>
+    <tr>
+        <th scope="row" id="nameTitle">이름</th>
+        <td>
+            <input name="name" type="text" value='{{name}}' required />
+        </td>
+    </tr> 
+    <tr>
+        <th scope="row" id="phoneNumber">전화번호</th>
+        <td>
+            <input name="phoneNumber" type="text" value='{{phoneNumber}}' required />
+            (-생략)
+        </td>
+    </tr>     
+
+
+</tbody> -->

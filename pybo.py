@@ -2,6 +2,8 @@
 import math
 from flask import Flask, render_template, request, redirect, url_for
 import pymysql
+import utils.utils as utils
+from flask_cors import CORS
 
 # 데이터 베이스 연동
 db = pymysql.connect(host="localhost", 
@@ -72,7 +74,6 @@ def write() :
         user = request.form['username']
         location = request.form['userlocation']
         contents = request.form['body']
-       
         
         cursor.execute("INSERT INTO Board (userId, title, content, location) VALUES ((SELECT userId FROM User WHERE ID = %s), %s, %s, %s);", (user, title, contents, location))
         cursor.connection.commit()
@@ -82,6 +83,73 @@ def write() :
 @app.route('/signup')
 def signup() :
     return render_template('signup.html')
+
+@app.route('/signup', methods=['POST'])
+def createUser():
+    try:
+
+        name = str(request.form.get('name'))
+        ID = str(request.form.get('ID'))
+        password = str(request.form.get('password'))
+        phoneNumber = str(request.form.get('phoneNumber'))
+
+        password_confirm = str(request.form.get('password_confirm'))
+        print(name, ID, password, password_confirm, phoneNumber)
+        
+        if len(ID) < 4 or len(ID) > 16 :
+            return '''
+                <script> alert("회원 가입에 실패했습니다.\\n  - 아이디는 4~16자로 작성하세요.");
+                location.href="/signup"
+                </script>
+                '''
+        if not utils.onlyalphanum(ID) :
+            return '''
+                <script> alert("회원 가입에 실패했습니다.\\n - 아이디는 영문 대소문자와 숫자로 작성하세요");
+                location.href="/signup"
+                </script>
+                '''
+        if not phoneNumber.isdecimal() :
+            return '''
+                <script> alert("회원 가입에 실패했습니다.\\n -  전화번호는 숫자만 작성하세요. ");
+                location.href="/signup"
+                </script>
+                '''
+        if  not name.isalpha():
+            return '''
+                <script> alert("회원 가입에 실패했습니다.\\n  - 이름은 한글 또는 영어로만 작성하세요");
+                location.href="/signup"
+                </script>
+                '''
+        if  password != password_confirm:
+            return '''
+                <script> alert("회원 가입에 실패했습니다.\\n  - 비밀번호 확인 란에 동일한 비밀번호를 입력하세요.");
+                location.href="/signup"
+                </script>
+                '''
+            
+
+        hashed_password = utils.hash_password(str(password))
+
+        user_info = [ name , ID , hashed_password, phoneNumber ]
+        
+        # a = userdao.createUser(user_info)
+
+        cursor.execute("INSERT INTO User(name, ID, password, phoneNumber) VALUES (%s, %s, %s, %s)", 
+                      (user_info[0], user_info[1], user_info[2], user_info[3]))
+        
+        print("before commit")
+        cursor.connection.commit()
+        print("after commit")
+
+
+        return '''
+                <script> alert("환영합니다. 회원가입에 성공했습니다 :) ");
+                location.href="/"
+                </script>
+                '''
+    
+    except Exception as e :
+        return {'error': str(e)}
 
 
 def main() :
