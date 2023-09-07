@@ -1,11 +1,11 @@
 # SSG_PROJECT01
 
-0. 시작전<br>
-0.1 install python module 
+1. 시작전<br>
+1.1 install python module 
 ```python
 pip install -r requirements.txt
 ```
-0.2 mysql 설치 및 데이터베이스 생성
+1.2 mysql 설치 및 데이터베이스 생성
 <details>
 <summary>데이터 베이스 SQL</summary>
 <div markdown="1">
@@ -71,8 +71,8 @@ REFERENCES `Board` (`boardId`);
 </div>
 </details>
 
-1. 시작
-1-1. FLASK와 데이터 베이스 연결
+2. 시작
+2-1. FLASK와 데이터 베이스 연결
 pybo.py
 ```python
 db = pymysql.connect(host="localhost", 
