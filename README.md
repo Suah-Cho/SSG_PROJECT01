@@ -1,12 +1,9 @@
 # SSG_PROJECT01
 
-0. 시작전
+0. 시작전<br>
 0.1 install python module 
 ```python
-pip install passlib
-pip install flask_cors
-pip install flask
-pip install mysql
+pip install -r requirements.txt
 ```
 0.2 mysql 설치 및 데이터베이스 생성
 <details>
