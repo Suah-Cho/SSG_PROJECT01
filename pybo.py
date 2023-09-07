@@ -59,7 +59,7 @@ def index() :
         else:
             # 입력받은 id에 해당하는 row 가져옴
             cursor = db.cursor()
-            sql = "select userId, ID, password from user where ID=%s and status= 'active';"
+            sql = "select userId, ID, password from User where ID=%s and status= 'active';"
             cursor.execute(sql, id_receive) #none / user정보 한줄
              
             # 입력받은 user가 db에 있으면 해당 row 한줄을 가져옴 
@@ -93,7 +93,7 @@ def index() :
 @app.route('/logout', methods=['GET', 'POST'])
 def logout() :
     session.pop('id', None)
-    return render_template("index.html")
+    return redirect(url_for('index'))
 
     
 
@@ -139,19 +139,38 @@ def view() :
 @app.route('/write/', methods=['GET', 'POST'])
 def write() :
     print(request.method)
-    if request.method == 'GET' :
-        return render_template("write.html")
-    elif request.method == 'POST' :
-        
-        title = request.form['title']
-        user = request.form['username']
-        location = request.form['userlocation']
-        contents = request.form['body']
-        
-        cursor.execute("INSERT INTO Board (userId, title, content, location) VALUES ((SELECT userId FROM User WHERE ID = %s), %s, %s, %s);", (user, title, contents, location))
-        cursor.connection.commit()
 
-        return redirect(url_for('view'))
+    if request.method == 'GET' :
+        ID=session.get('id')
+        print(ID)
+        return render_template("write.html", ID = ID)
+    
+    elif request.method == 'POST' :
+        if 'id' in session :
+            print("in session_write")
+            title = request.form.get('title')
+            ID = session.get('id')
+            
+            # user = request.form['username']
+            location = request.form.get('userlocation')
+            contents = request.form.get('body')
+            print(title, ID, location, contents)
+
+
+            
+            cursor.execute("INSERT INTO Board (userId, title, content, location) VALUES ((SELECT userId FROM User WHERE ID = %s), %s, %s, %s);", (ID, title, contents, location))
+            cursor.connection.commit()
+
+            return redirect(url_for('view'))
+        else :
+            print("else")
+            return '''
+                    <script> alert("로그인을 해주세요:)");
+                    location.href="/"
+                    </script>
+                '''
+        
+        
 
 @app.route('/signup')
 def signup() :

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>One Step</title>
+    <title>First Step</title>
     <link rel="stylesheet" href="../static/css/css.css">
 </head>
 
@@ -58,16 +58,16 @@
                 <!-- <input type="text" name="username" placeholder="아이디" value="{{username}}" ><br>
                 <input type="password" name="password" placeholder="비밀번호" value="{{password}}"><br>     -->
                 
-                <div class="login_button_wrap">
-                    <form action="/" method="POST">
-                        <input type="text" name="username" placeholder="아이디" value="{{username}}" ><br>
-                        <input type="password" name="password" placeholder="비밀번호" value="{{password}}"><br>    
-                        <button class="bt_signup" type="submit">SignIn</button>
-                    </form>
-                    <form action="/signup">
-                        <button class="bt_signin" type="submit">SignUp</button>
-                    </form>
-                </div>
+                
+                <form action="/" method="POST">
+                    <input type="text" name="username" placeholder="아이디" value="{{username}}" ><br>
+                    <input type="password" name="password" placeholder="비밀번호" value="{{password}}"><br>    
+                    <button class="bt_signup" type="submit">SignIn</button>
+                </form>
+                <form action="/signup">
+                    <button class="bt_signin" type="submit">SignUp</button>
+                </form>
+            
                 
                 <!-- <div class="login_button_wrap">
                     <form action="/signup">
