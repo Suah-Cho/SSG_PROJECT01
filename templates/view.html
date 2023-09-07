@@ -51,11 +51,13 @@
                 </div>
                 <textarea class="cont">{{ i[3] }}</textarea>
             </div>
-            {% endfor %}
+            
             <div class="bt_wrap">
                 <a href="/list" class="on">목록</a>
-                <button type="submit">수정</button>
+                <a onclick="location.href='/edit/{{i[0]}}'">수정</a>
+                <!-- <button type="submit">수정</button> -->
             </div>
+            {% endfor %}
         </div>
         </form>
     </div>

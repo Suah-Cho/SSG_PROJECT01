@@ -106,8 +106,38 @@ def view2(id) :
     return render_template("view.html", data = data)
 
 
-@app.route('/edit/')
-def edit() :
+@app.route('/edit/<int:id>', methods=['GET', 'POST'])
+def edit(id) :
+    if request.method == 'GET' :
+        cursor.execute("SELECT u.ID FROM Board as b LEFT OUTER JOIN User as u on u.userId = b.userId WHERE boardId = {};".format(id))
+        userId = cursor.fetchall()
+        userId = userId[0][0]
+        ID = session.get('id')
+
+        if userId != ID :
+            return '''
+                    <script> alert("권한이 없습니다 :)");
+                    location.href="/list"
+                    </script>
+                '''
+
+        cursor.execute("SELECT b.boardId, b.title, u.ID, b.content, b.location, date_format(b.createAt, '%Y-%m-%d') FROM Board as b LEFT OUTER JOIN User as u on u.userId = b.userId WHERE boardId = {} ORDER BY b.createAt DESC;".format(id))
+        data = cursor.fetchall()
+
+        return render_template("edit.html", data=data, ID = ID)
+    
+    elif request.method == 'POST' :
+        ID = session.get('id')
+            
+        # location = request.form.get('userlocation')
+        contents = request.form.get('body')
+        print(id , type(id))
+        cursor.execute("UPDATE Board SET content = '{}' WHERE boardId = {};".format(contents, id))
+        cursor.connection.commit()
+
+        return redirect(url_for('view2', id=id))
+        
+
     return render_template("edit.html")
 
 @app.route('/view')
@@ -123,12 +153,17 @@ def view() :
 
 @app.route('/write/', methods=['GET', 'POST'])
 def write() :
-    print(request.method)
 
     if request.method == 'GET' :
         ID=session.get('id')
-
-        return render_template("write.html", ID = ID)
+        if 'id' in session :
+            return render_template("write.html", ID = ID)
+        else :
+            return '''
+                    <script> alert("로그인을 해주세요:)");
+                    location.href="/"
+                    </script>
+                '''
     
     elif request.method == 'POST' :
         if 'id' in session :
