@@ -274,6 +274,31 @@ def createUser():
     
     except Exception as e :
         return {'error': str(e)}
+    
+
+#회원탈퇴
+@app.route('/delete_user', methods=['POST'])
+def delete_user():
+    try:
+        # ID = str(request.form.get('ID'))
+    
+        if 'userid' in session :
+
+            userId = session.get('userid')
+            cursor.execute("UPDATE user SET status = 'inactive' WHERE userId = %s and status = 'active' ", userId)
+            
+            cursor.connection.commit()
+
+            # return redirect(url_for('delete_user_complete'))
+            return '''
+                    <script> alert("감사합니다. 회원 탈퇴에 성공했습니다 :) ");
+                    location.href="/logout"
+                    </script>
+                    '''
+    
+    
+    except Exception as e :
+        return {'error': str(e)}   
 
 
 def main() :
