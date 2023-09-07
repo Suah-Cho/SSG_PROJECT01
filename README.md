@@ -71,7 +71,7 @@
     </div>
     </details>
 
-2. 시작
+2. 시작<br>
     2-1. FLASK와 데이터 베이스 연결
     pybo.py
     ```python
