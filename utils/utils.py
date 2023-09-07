@@ -20,3 +20,7 @@ def onlyalphanum(check):
         else:
             return False
     return True
+
+def verfifyPwd(inputPwd, hashed_password):
+    salt = 'yh*hello12'
+    return pbkdf2_sha256.verify(inputPwd+salt, hashed_password)

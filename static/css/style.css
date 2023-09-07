@@ -69,7 +69,8 @@ textarea {
 
 .index_wrap2 {
     margin: 10px;
-    width: auto;
+    width: 100%;
+    /* border: solid #999; */
     
 
 }
@@ -101,9 +102,10 @@ textarea {
     border: 2px solid #1dc078;
     background: #1dc078;
     color: #fff;
-    width: 100%;
+    width: 170px;
     height: 3em;
     border-radius: 2px;
+    margin-top: 5px;
 }
 
 .index_wrap2 a {
@@ -132,7 +134,7 @@ textarea {
 
 .login_button_wrap {
     width: auto;
-    display: flex;
+    /* display: flex; */
     /* justify-content: center; */
     /* align-items: center; */
 }
@@ -143,6 +145,8 @@ textarea {
     /* border: 4px solid #000; */
     position: relative;
     text-align: center;
+    align-items: center;
+    justify-content: center;
     margin-left: 42%;
     /* justify-content: center; */
 }
@@ -156,6 +160,10 @@ textarea {
 .signup_info {
     position: relative;
     text-align: center;
+    /* border: 4px solid #000; */
+    align-items: center;
+
+    /* justify-content: center; */
 
 }
 
@@ -163,17 +171,15 @@ textarea {
     font: bold 15px 'arial';
     text-align: left;
     margin-bottom: 7px;
+    align-items: center;
 }
 
-.signup_info h3 {
-    font: bold 15px 'arial';
-    text-align: left;
-}
 
 .signup_info p {
     font: bold 12px 'arial';
     text-align: left;
     color: #999;
+    align-items: center;
     /* letter-spacing: 2px; */
     /* margin-top: 5px; */
 }
@@ -185,10 +191,22 @@ textarea {
     font-size: small;
     text-align: left;
     padding-left: 10px;
+    align-items: center;
     
 }   
 
+.index_wrap2 {
+    margin: 10px;
+    width: 40%;
+    /* border: solid #999; */
 
+}
+
+
+.login_complete h2 {
+    font: 15px bold 'arial';
+    
+}
 
 .board_wrap {
     width: 1000px;

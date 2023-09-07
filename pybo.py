@@ -1,6 +1,7 @@
 
 import math
-from flask import Flask, render_template, request, redirect, url_for
+# from flask import Flask, render_template, request, redirect, url_for
+from flask import *
 import pymysql
 import utils.utils as utils
 from flask_cors import CORS
@@ -15,14 +16,86 @@ cursor = db.cursor()
 
 
 app = Flask(__name__)
-# @app.route('/', defaults={'page':1})
-@app.route('/')
-def list() :
+app.config['SECRET_KEY'] = 'asdf'
 
-    cursor.execute("SELECT b.boardId, b.title, u.ID, b.location, date_format(b.createAt, '%Y-%m-%d') FROM board as b LEFT OUTER JOIN user as u on u.userId = b.userId ORDER BY b.createAt DESC LIMIT 0, 3;")
-    data_list = cursor.fetchall()
+@app.route('/', methods=['GET', 'POST'])
+def index() :
+    global cursor
+    print(request.method)
 
-    return render_template("index.html", data_list = data_list)
+    if request.method == 'GET' :
+        if 'id' in session:
+            print("in session")
+            cursor.execute("SELECT b.boardId, b.title, u.ID, b.location, date_format(b.createAt, '%Y-%m-%d') FROM Board as b LEFT OUTER JOIN User as u on u.userId = b.userId ORDER BY b.createAt DESC LIMIT 0, 3;")
+            data_list = cursor.fetchall()
+            return render_template('login.html', data_list=data_list, a = session['id'])
+        
+        else :
+            print("no session")
+            cursor.execute("SELECT b.boardId, b.title, u.ID, b.location, date_format(b.createAt, '%Y-%m-%d') FROM Board as b LEFT OUTER JOIN User as u on u.userId = b.userId ORDER BY b.createAt DESC LIMIT 0, 3;")
+            data_list = cursor.fetchall()
+            return render_template("index.html", data_list = data_list)
+        
+    elif request.method == 'POST' :
+
+        # name = str(request.form.get('username'))
+
+        # a = request.form['username']
+
+        # print(name)
+        # print(a)
+
+
+        id_receive = request.form.get('username')
+        pw_receive = request.form.get('password')
+        
+        print(id_receive, pw_receive)
+        
+        # 입력 x
+        if len(id_receive) == 0 or len(pw_receive) == 0:
+            return redirect(url_for('index'))
+        
+        # 입력 o
+        else:
+            # 입력받은 id에 해당하는 row 가져옴
+            cursor = db.cursor()
+            sql = "select userId, ID, password from user where ID=%s and status= 'active';"
+            cursor.execute(sql, id_receive) #none / user정보 한줄
+             
+            # 입력받은 user가 db에 있으면 해당 row 한줄을 가져옴 
+            row = cursor.fetchone()
+            print(row)
+            
+            # id, pw 체크 (row[2] = ID정보, row[3] = password정보)
+
+            if row and id_receive == row[1] and  utils.verfifyPwd(pw_receive, row[2]):
+                print("correct")
+                # session id, userid 오브젝트 생성*저장
+                session['logFlag'] = True
+                session['id'] = id_receive
+                session['userid'] = row[0]
+                
+                
+                # 로그인 성공 메시지 출력 후 /sesesion 이동 
+                return '''
+                    <script> alert("안녕하세요, {}님 :)");
+                    location.href="/"
+                    </script>
+                '''.format(id_receive)      
+                # return redirect(url_for('login'))
+            
+            else:
+                return redirect(url_for('index'))
+    else:
+        return 'wrong access'      
+
+
+@app.route('/logout', methods=['GET', 'POST'])
+def logout() :
+    session.pop('id', None)
+    return render_template("index.html")
+
+    
 
 @app.route('/list', defaults={'page':1})
 @app.route('/list/<int:page>')
@@ -54,7 +127,7 @@ def edit() :
 def view() :
     print(request.method)
     
-    cursor.execute("SELECT b.boardId, b.title, u.ID, b.content, b.location, date_format(b.createAt, '%Y-%m-%d') FROM Board as b LEFT OUTER JOIN User as u on u.userId = b.userId WHERE boardId = (SELECT MAX(boardId) FROM Board) ORDER BY b.createAt DESC;",)
+    cursor.execute("SELECT b.boardId, b.title, u.ID, b.content, b.location, date_format(b.createAt, '%Y-%m-%d') FROM Board as b LEFT OUTER JOIN User as u on u.userId = b.userId WHERE boardId = (SELECT MAX(boardId) FROM Board) ORDER BY b.createAt DESC;")
     data = cursor.fetchall()
     print(data)
 
@@ -95,6 +168,28 @@ def createUser():
 
         password_confirm = str(request.form.get('password_confirm'))
         print(name, ID, password, password_confirm, phoneNumber)
+
+        #ID existence check
+        cursor.execute("SELECT ID from User WHERE ID = %s", ID)
+        checkID = cursor.fetchone()
+
+        if checkID:
+            return '''
+                <script> alert("회원 가입에 실패했습니다.\\n  - 존재하는 아이디입니다. 다른 아이디를 사용해주세요.");
+                location.href="/signup"
+                </script>
+                '''
+
+        #phoneNumber existence check
+        cursor.execute("SELECT phoneNumber from User WHERE phoneNumber = %s", phoneNumber)
+        checkPhone= cursor.fetchone()
+
+        if checkPhone :
+            return '''
+                <script> alert("회원 가입에 실패했습니다.\\n  - 존재하는 전화번호 입니다. 다시 확인해주세요");
+                location.href="/signup"
+                </script>
+                '''
         
         if len(ID) < 4 or len(ID) > 16 :
             return '''
@@ -131,8 +226,6 @@ def createUser():
         hashed_password = utils.hash_password(str(password))
 
         user_info = [ name , ID , hashed_password, phoneNumber ]
-        
-        # a = userdao.createUser(user_info)
 
         cursor.execute("INSERT INTO User(name, ID, password, phoneNumber) VALUES (%s, %s, %s, %s)", 
                       (user_info[0], user_info[1], user_info[2], user_info[3]))
@@ -151,6 +244,68 @@ def createUser():
     except Exception as e :
         return {'error': str(e)}
 
+
+#login
+# @app.route('/complete')
+# def display_user_login_form():
+#     return render_template('login.html')
+
+
+# @app.route('/login', methods=['GET', 'POST'])
+# def login():
+#     # 로그인 버튼 클릭
+#     if request.method == 'POST':
+#         id_receive = request.form.get('username')
+#         pw_receive = request.form.get('password')
+
+#         print(id_receive, pw_receive)
+        
+#         # 입력 x
+#         if len(id_receive) == 0 or len(pw_receive) == 0:
+#             return redirect(url_for('display_user_signup_form'))
+        
+#         # 입력 o
+#         else:
+#             # 입력받은 id에 해당하는 row 가져옴
+#             cursor = db.cursor()
+#             sql = sql = "select * from user where ID=%s and status=%s"
+#             cursor.execute(sql, (id_receive, 'active')) #none / user정보 한줄
+             
+#             # 입력받은 user가 db에 있으면 해당 row 한줄을 가져옴 
+#             row = cursor.fetchone()
+        
+            
+#             # id, pw 체크 (row[2] = ID정보, row[3] = password정보)
+#             if row and id_receive == row[2] and pw_receive == row[3]:
+                
+#                 # session id, userid 오브젝트 생성*저장
+#                 session['logFlag'] = True
+#                 session['id'] = id_receive
+#                 session['userid'] = row[0]
+                
+                
+#                 # 로그인 성공 메시지 출력 후 /sesesion 이동 
+#                 return '''
+#                     <script> alert("안녕하세요, {}님 :)");
+#                     location.href="/session"
+#                     </script>
+#                 '''.format(id_receive)      
+#                 # return redirect(url_for('login'))
+            
+#             else:
+#                 return redirect(url_for('display_user_signup_form'))
+#     else:
+#         return 'wrong access'      
+        
+        
+# # 로그인 성공자만 이동
+# @app.route('/session')
+# def session_():
+#     if 'id' in session:
+#         # return render_template('login.html', a = session['id'])
+#         redirect(url_for('login'))
+    
+#     return redirect(url_for('index'))
 
 def main() :
     app.run(debug=True, port=80)

@@ -51,32 +51,11 @@
         </div>
         <div>
             <div class="index_wrap2">
-                <h1>Login</h1>
-
-                <!-- <input type="text" placeholder="아이디" required name="title"> -->
-                
-                <!-- <input type="text" name="username" placeholder="아이디" value="{{username}}" ><br>
-                <input type="password" name="password" placeholder="비밀번호" value="{{password}}"><br>     -->
-                
-                <div class="login_button_wrap">
-                    <form action="/" method="POST">
-                        <input type="text" name="username" placeholder="아이디" value="{{username}}" ><br>
-                        <input type="password" name="password" placeholder="비밀번호" value="{{password}}"><br>    
-                        <button class="bt_signup" type="submit">SignIn</button>
-                    </form>
-                    <form action="/signup">
-                        <button class="bt_signin" type="submit">SignUp</button>
-                    </form>
-                </div>
-                
-                <!-- <div class="login_button_wrap">
-                    <form action="/signup">
-                        <button class="bt_signup" type="submit">SignUp</button>
-                    </form>
-                    <form action="/" method="POST">
-                        <button class="bt_signin" type="submit">SignIn</button>
-                    </form>
-                </div> -->
+                <form action="/logout" method="POST">
+                    <h1>{{ a }}</h1>
+                    <!-- <p>반갑습니다.</p> -->
+                    <button type="submit">LogOut</button>
+                </form>
             </div>
         </div>
     </div>
