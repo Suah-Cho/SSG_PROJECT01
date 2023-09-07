@@ -285,7 +285,7 @@ def delete_user():
         if 'userid' in session :
 
             userId = session.get('userid')
-            cursor.execute("UPDATE user SET status = 'inactive' WHERE userId = %s and status = 'active' ", userId)
+            cursor.execute("UPDATE User SET status = 'inactive' WHERE userId = %s and status = 'active' ", userId)
             
             cursor.connection.commit()
 
