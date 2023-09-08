@@ -1,5 +1,53 @@
-# SSG_PROJECT01
+## SSG_PROJECT01
+#### FLASK를 이용한 CURD기능 만들기
 
+## 서비스 소개
+###     소외 계층을 위한 통합 플랫폼
+- 참고 레퍼런스
+  - 부트텐트  https://boottent.sayun.studio/camps
+  - 희망장난감 https://www.yctoy.or.kr/
+## 팀원
+|이름|포지션|
+|:---:|:---:|
+|김기성|로그인기능, 게시물 수정, 발표자료 담당|
+|김서연|팀장, DB table SQL, EC2, 회원 가입 기능|
+|신명호|회원 탈퇴 기능, 기획서 작성|
+|조수아|게시글 페이징, 게시글 작성, HTML/CSS|
+
+## 목적 및 필요성
+
+## 핵심 기능
+
+## 기술 스택
+<details>
+    <summary>Front-end</summary>
+    <div markdown='1'>
+        
+    </div>
+</details>
+<details>
+    <summary>Back-end</summary>
+    <div markdown='1'>
+        
+    </div>
+</details>
+<details>
+    <summary>Infra</summary>
+    <div markdown='1'>
+        
+    </div>
+</details>
+
+
+## System Architecture
+<img src='/architecture.png' />
+
+## CI/CD Process
+
+## ERD
+<img src='/ERD.png' />
+
+## 개발 과정
 1. 시작전<br>
     1.1 install python module 
     ```python
