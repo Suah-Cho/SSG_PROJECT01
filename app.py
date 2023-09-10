@@ -141,7 +141,7 @@ def edit(id) :
     return render_template("edit.html")
 
 # 게시글 삭제
-@app.route('/edit_delete/<int:id>', methods=['GET', 'POST'])
+@app.route('/delete/<int:id>', methods=['GET', 'POST'])
 def edit_delete(id) :
     if request.method == 'GET' :
         cursor.execute("SELECT u.ID FROM Board as b LEFT OUTER JOIN User as u on u.userId = b.userId WHERE boardId = {};".format(id))
