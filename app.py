@@ -140,6 +140,31 @@ def edit(id) :
 
     return render_template("edit.html")
 
+# 게시글 삭제
+@app.route('/edit_delete/<int:id>', methods=['GET', 'POST'])
+def edit_delete(id) :
+    if request.method == 'GET' :
+        cursor.execute("SELECT u.ID FROM Board as b LEFT OUTER JOIN User as u on u.userId = b.userId WHERE boardId = {};".format(id))
+        userId = cursor.fetchall()
+        userId = userId[0][0]   # userId 값 받는 부분 복사함
+        ID = session.get('id')  # ID값 session으로 받는 부분 복사함
+
+        if userId != ID :
+            return '''
+                    <script> alert("게시글 삭제 권한이 없습니다 :)");
+                    location.href="/list"
+                    </script>
+                '''
+
+        else:
+            cursor.execute("UPDATE Board SET status = 'inactive' WHERE boardId = {};".format(id))
+            cursor.connection.commit()
+            return '''
+                    <script> alert("해당 게시글이 삭제되었습니다. :)");
+                    location.href="/list"
+                    </script>
+                '''
+
 @app.route('/view')
 def view() :
     
