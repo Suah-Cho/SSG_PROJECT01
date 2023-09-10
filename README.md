@@ -2,10 +2,10 @@
 #### FLASK를 이용한 CURD기능 만들기
 
 ## 서비스 소개
-###     소외 계층을 위한 통합 플랫폼
-- 참고 레퍼런스
-  - 부트텐트  https://boottent.sayun.studio/camps
-  - 희망장난감 https://www.yctoy.or.kr/
+필요한 물품 혹은 필요 없는 물품을 서로 공유하며 더 좋은 세상으로 한 걸음 나아가는 커뮤니티입니다.
+
+- [배포 URL](https://first-step.shop)
+  
 ## 팀원
 |이름|포지션|
 |:---:|---|
@@ -19,40 +19,28 @@
 ## 핵심 기능
 
 ## 기술 스택
-<details>
-    <summary>Front-end</summary>
-    <div markdown='1'>
-        
-    </div>
-</details>
-<details>
-    <summary>Back-end</summary>
-    <div markdown='1'>
-        
-    </div>
-</details>
-<details>
-    <summary>Infra</summary>
-    <div markdown='1'>
-        
-    </div>
-</details>
+![Static Badge](https://img.shields.io/badge/Python3-3776AB?logo=Python&logoColor=%23FFFFFF) ![Static Badge](https://img.shields.io/badge/HTML5-E34F26?logo=HTML5&logoColor=%23FFFFFF) ![Static Badge](https://img.shields.io/badge/Flask-000000?logo=Flask&logoColor=%23FFFFFF) ![Static Badge](https://img.shields.io/badge/AWS-FF9900?logo=Amazon%20AWS&logoColor=%23FFFFFF) <img src="https://img.shields.io/badge/MySQL-4479A1?style=flat-square&logo=MySQL&logoColor=white"/>
 
+## 개발 환경
+- OS : ![Linux](https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black)
+- Editor : ![Static Badge](https://img.shields.io/badge/VSCode-007ACC?logo=Visual%20Studio%20Code&logoColor=%23FFFFFF)
 
 ## System Architecture
 <img src='/architecture.png' />
 
-## CI/CD Process
+## 운영 환경
+
 
 ## ERD
 <img src='/ERD.png' />
 
-## 개발 과정
-1. 시작전<br>
+## 설치 가이드
+1. <br>
     1.1 install python module 
     ```python
     pip install -r requirements.txt
     ```
+    <br>
     1.2 mysql 설치 및 데이터베이스 생성
     <details>
     <summary>데이터 베이스 SQL</summary>
@@ -119,18 +107,23 @@
     </div>
     </details>
 
-2. 시작<br>
-    2-1. FLASK와 데이터 베이스 연결
-    pybo.py
+2. <br>
+    2-1. FLASK와 데이터 베이스 연결<br>
+    pybo.py <br><br>
+    
     ```python
     db = pymysql.connect(host="localhost", 
                          user="root", password="passwd", 
                          db="test3",
                          charset="utf8")
     ```
+   
     host, user, password, db는 환경에 맞춰서 변경하면 된다.
 
-3. 이후<br>
-    
+
+
+- 참고 레퍼런스
+  - 부트텐트  https://boottent.sayun.studio/camps
+  - 희망장난감 https://www.yctoy.or.kr/
     
     
