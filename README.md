@@ -28,7 +28,8 @@
 ## System Architecture
 <img src='/architecture.png' />
 
-## 운영 환경
+## 순서도
+<img src='/flow.jpeg' />
 
 
 ## ERD
