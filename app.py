@@ -105,6 +105,16 @@ def view2(id) :
 
     return render_template("view.html", data = data)
 
+@app.route('/toylistview/<int:id>')    
+def toyview(id) :
+
+    # cursor.execute("SELECT b.boardId, b.title, u.ID, b.content, b.location, date_format(b.createAt, '%Y-%m-%d') FROM Board as b LEFT OUTER JOIN User as u on u.userId = b.userId WHERE boardId = {} ORDER BY b.createAt DESC;".format(id))
+    cursor.execute("SELECT boardId, title, content, userage, area, phoneNumber, rent, createAt FROM ToyBoard WHERE boardId = {} ORDER BY createAt DESC;".format(id))
+    
+    data = cursor.fetchall()
+
+    return render_template("toyview.html", data = data)
+
 
 @app.route('/edit/<int:id>', methods=['GET', 'POST'])
 def edit(id) :
