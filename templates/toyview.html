@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>First Step</title>
+    <link rel="stylesheet" href="../static/css/css.css">
+</head>
+
+<body>
+    <header class="header">
+        <div class="header_logo">
+            <a href="/">
+                <h1>한걸음 대여소</h1>
+            </a>
+        </div>
+        <div class="header_gnb">
+            <a href='/list'>자유 게시판</a>
+            <a href='/toylist'>장난감 대여</a>
+        </div>
+    </header>
+    <div class="board_wrap">
+        <div class="board_title">
+            <strong>장난감 대여소</strong>
+            <p>지역의 장난감 대여 상황에 대해 알려드립니다.</p>
+        </div>
+        <form action="/edit">
+        <div class="board_view_wrap">
+            {% for i in data %}
+            <div class="board_view">
+                <div class="title">
+                    {{ i[1] }}
+                </div>
+                <div class="info">
+                    <dl>
+                        <dt>번호</dt>
+                        <dd>{{ i[0] }}</dd>
+                    </dl>
+                    <dl>
+                        <dt>권장 연령</dt>
+                        <dd>{{ i[3] }}</dd>
+                    </dl>
+                    <dl>
+                        <dt>작성일</dt>
+                        <dd>{{ i[7] }}</dd>
+                    </dl>
+                    <dl>
+                        <dt>지역</dt>
+                        <dd>{{ i[4] }}</dd>
+                    </dl>
+                    <dl>
+                        <dt>대여 가능 여부</dt>
+                        <dd>{{ i[6] }}</dd>
+                    </dl>
+                </div>
+                <textarea class="cont">{{ i[2] }}
+
+문의 - {{ i[5] }}
+                </textarea>
+            </div>
+            
+            <div class="bt_wrap">
+                <a href="/toylist" class="on">목록</a>
+            </div>
+            {% endfor %}
+        </div>
+        </form>
+    </div>
+</body>
+
+</html>

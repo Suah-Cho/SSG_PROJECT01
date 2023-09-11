@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>First Step</title>
+    <link rel="stylesheet" href="../static/css/css.css">
+</head>
+
+<body>
+    <header class="header">
+        <div class="header_logo">
+            <a href="/">
+                <h1>한걸음 대여소</h1>
+            </a>
+        </div>
+        <div class="header_gnb">
+            <a href='/list'>자유 게시판</a>
+            <a href='/toylist'>장난감 대여</a>
+        </div>
+    </header>
+    <div class="board_wrap">
+        <div class="board_title">
+            <strong>장난감 대여소</strong>
+            <p>지역의 장난감 대여 상황에 대해 알려드립니다.</p>
+        </div>
+        <div class="board_list_wrap">
+            <div class="board_list">
+                <div class="top">
+                    <div class="num">번호</div>
+                    <div class="title">제목</div>
+                    <div class="writer">사용 연령</div>
+                    <div class="writer">지역</div>
+                    <div class="date">작성일</div>
+                </div>
+                {% for i in data_list %}
+                <div>
+                    <div class="num">{{ i[0] }}</div>
+                    <div class="title" onclick="location.href='/toylistview/{{i[0]}}'">{{ i[1] }}</a></div>
+                    <div class="writer">{{ i[2] }}</div>
+                    <div class="count">{{ i[3] }}</div>
+                    <div class="date">{{ i[4] }}</div>
+                </div>
+                {% endfor %}
+                
+            </div>
+            
+        <div class="board_page">
+            <a href="#" class="bt first">
+                << </a>
+                    <a href="#" class="bt prev">
+                        < </a>
+                            <a href="/toylist" class="num">1</a>
+                            <a href="/toylist/2" class="num">2</a>
+                            <a href="/toylist/3" class="num">3</a>
+                            <a href="/toylist/4" class="num">4</a>
+                            <a href="/toylist/5" class="num">5</a>
+                            <a href="/toylist/6" class="num">6</a>
+                            <a href="/toylist/7" class="num">7</a>
+                            <a href="/toylist/8" class="num">8</a>
+                            <a href="/toylist/9" class="num">9</a>
+                            <a href="/toylist/10" class="num">10</a>
+                            <a href="#" class="bt next">></a>
+                            <a href="#" class="bt last">>></a>
+        </div>
+    </div>
+    </div>
+</body>
+
+</html>
