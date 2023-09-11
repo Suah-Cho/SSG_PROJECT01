@@ -21,13 +21,13 @@ def index() :
 
     if request.method == 'GET' :
         if 'id' in session:
-            cursor.execute("SELECT b.boardId, b.title, u.ID, b.location, date_format(b.createAt, '%Y-%m-%d') FROM Board as b LEFT OUTER JOIN User as u on u.userId = b.userId ORDER BY b.createAt DESC LIMIT 0, 3;")
+            cursor.execute("SELECT b.boardId, b.title, u.ID, b.location, date_format(b.createAt, '%Y-%m-%d') FROM Board as b LEFT OUTER JOIN User as u on u.userId = b.userId WHERE b.status = 'active' ORDER BY b.createAt DESC LIMIT 0, 3;")
             data_list = cursor.fetchall()
 
             return render_template('login.html', data_list=data_list, a = session['id'])
         
         else :
-            cursor.execute("SELECT b.boardId, b.title, u.ID, b.location, date_format(b.createAt, '%Y-%m-%d') FROM Board as b LEFT OUTER JOIN User as u on u.userId = b.userId ORDER BY b.createAt DESC LIMIT 0, 3;")
+            cursor.execute("SELECT b.boardId, b.title, u.ID, b.location, date_format(b.createAt, '%Y-%m-%d') FROM Board as b LEFT OUTER JOIN User as u on u.userId = b.userId WHERE b.status = 'active' ORDER BY b.createAt DESC LIMIT 0, 3;")
             data_list = cursor.fetchall()
 
             return render_template("index.html", data_list = data_list)
