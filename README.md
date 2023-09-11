@@ -122,7 +122,19 @@
     </div>
     </details>
 
-2. <br>
+    1-3. 공공데이터 csv 데이터베이스에 저장하기
+   ```python
+     toy = pd.read_csv('SSG_PROJECT01/전북 진안군_장난감 보유 현황.csv', sep=',', index_col=0)
+
+    #데이터베이스에 csv정보 저장
+    for i in range(1, len(toy)+1) :
+      list = toy.loc[i].str.split('   ').str[0].tolist()
+      curosr.execute("INSERT INTO ToyBoard (userId, title, content, userage, area, phoneNumber) VALUES (1, CONCAT(%s,' - ',%s), %s, %s, '전북 진안군', %s);", 
+                          (list[0], list[2], list[4], list[3], list[6]))
+      curosr.connection.commit()
+   ```
+
+3. <br>
     2-1. FLASK와 데이터 베이스 연결<br>
     pybo.py <br><br>
     
