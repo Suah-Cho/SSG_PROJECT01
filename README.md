@@ -29,7 +29,7 @@
 <img src='/architecture.png' />
 
 ## 순서도
-<img src='/flow.jpeg' />
+<img src='/flow.jpg' />
 
 
 ## ERD
