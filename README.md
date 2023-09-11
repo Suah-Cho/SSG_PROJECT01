@@ -93,6 +93,21 @@
             `commentId`
         )
     );
+
+    CREATE TABLE `ToyBoard` (
+    	`boardId` int unsigned AUTO_INCREMENT NOT NULL , 
+    	`userId` int unsigned NOT NULL, 
+    	`title` varchar(100) NOT NULL, 
+    	`content` varchar(1000) NOT NULL, 
+    	`userage` varchar(20) NOT NULL, 
+    	`area` varchar(20) NOT NULL, 
+    	`phoneNumber` varchar(30) NOT NULL,  
+    	`rent` varchar(20) default '가능' NOT NULL, 
+    	`status` varchar(10) default 'active' NOT NULL,
+    	`createAt` timestamp default CURRENT_TIMESTAMP NOT NULL, 
+    	`updateAt` timestamp default CURRENT_TIMESTAMP NOT NULL, 
+    	PRIMARY KEY( `boardId` )
+    );
     
     ALTER TABLE `Board` ADD CONSTRAINT `fk_Board_userId` FOREIGN KEY(`userId`)
     REFERENCES `User` (`userId`);
