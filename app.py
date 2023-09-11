@@ -97,6 +97,16 @@ def paging(page) :
 
     return render_template("list.html", data_list = data_list)
 
+@app.route('/toylist', defaults={'page':1})
+@app.route('/toylist/<int:page>')
+def toylistpaging(page):
+    perpage = 10
+    startat = (page - 1) * perpage
+    cursor.execute("select boardId, title, userage, area, date_format(createAt, '%Y-%m-%d') FROM ToyBoard WHERE status = 'active' ORDER BY createAt DESC LIMIT "+str(startat)+", "+str(perpage)+";")
+    data_list = cursor.fetchall()
+
+    return render_template("toylist.html", data_list=data_list)
+
 @app.route('/listview/<int:id>')    
 def view2(id) :
 
