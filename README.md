@@ -155,3 +155,7 @@
   - 희망장난감 https://www.yctoy.or.kr/
     
     
+## 수정사항
+1. 제목, 지역 수정가능하게 하기
+   - edit.html에서 text대신 textarea로 받아보기
+   - view.html에서 본문 textarea를 수정안되게 만들 수 있는 지 확인해보기
