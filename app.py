@@ -149,10 +149,12 @@ def edit(id) :
     elif request.method == 'POST' :
         ID = session.get('id')
             
-        # location = request.form.get('userlocation')
+        titles = request.form.get('title')
         contents = request.form.get('body')
-        print(id , type(id))
+        
+        cursor.execute("UPDATE Board SET title = '{}' WHERE boardId = {};".format(titles, id))
         cursor.execute("UPDATE Board SET content = '{}' WHERE boardId = {};".format(contents, id))
+      
         cursor.connection.commit()
 
         return redirect(url_for('view2', id=id))
