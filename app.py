@@ -110,10 +110,22 @@ def toylistpaging(page):
 @app.route('/listview/<int:id>')    
 def view2(id) :
 
-    cursor.execute("SELECT b.boardId, b.title, u.ID, b.content, b.location, date_format(b.createAt, '%Y-%m-%d') FROM Board as b LEFT OUTER JOIN User as u on u.userId = b.userId WHERE boardId = {} ORDER BY b.createAt DESC;".format(id))
-    data = cursor.fetchall()
+    cursor.execute("SELECT status FROM Board WHERE boardId = {};".format(id))
+    boardstatus = cursor.fetchall()
 
-    return render_template("view.html", data = data)
+    if boardstatus[0][0] == 'active' :
+        cursor.execute("SELECT b.boardId, b.title, u.ID, b.content, b.location, date_format(b.createAt, '%Y-%m-%d') FROM Board as b LEFT OUTER JOIN User as u on u.userId = b.userId WHERE boardId = {} ORDER BY b.createAt DESC;".format(id))
+        data = cursor.fetchall()
+
+        return render_template("view.html", data = data)
+    else :
+        return '''
+                    <script> alert("삭제된 게시물입니다.");
+                    location.href="/list"
+                    </script>
+                '''
+
+    
 
 @app.route('/toylistview/<int:id>')    
 def toyview(id) :
@@ -190,6 +202,7 @@ def edit_delete(id) :
 @app.route('/view')
 def view() :
     
+
     cursor.execute("SELECT b.boardId, b.title, u.ID, b.content, b.location, date_format(b.createAt, '%Y-%m-%d') FROM Board as b LEFT OUTER JOIN User as u on u.userId = b.userId WHERE boardId = (SELECT MAX(boardId) FROM Board) ORDER BY b.createAt DESC;")
     data = cursor.fetchall()
 
