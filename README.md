@@ -4,7 +4,7 @@
 ## 서비스 소개
 필요한 물품 혹은 필요 없는 물품을 서로 공유하며 더 좋은 세상으로 한 걸음 나아가는 커뮤니티입니다.
 
-- [배포 URL](https://first-step.shop)
+- [배포 URL (https://first-step.shop)](https://first-step.shop)
 - [기획서](https://docs.google.com/document/d/11NMLUzRPwFe9vcNbvCp-_t1hVwUOghqN/edit?usp=drive_link&ouid=116282982421138719470&rtpof=true&sd=true)
 - [발표 자료](https://drive.google.com/file/d/1LlYdZ1EYSi-Gk7nqZf_WpNbB_drjYU8F/view?usp=drive_link)
   
