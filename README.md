@@ -158,7 +158,10 @@
     
     
 ## 수정사항
-1. 제목, 지역 수정가능하게 하기
-   - board delete했을 때 해당 url로 갈 수 있으므 -> '삭제된 게시물입니다.'alert띄워보기 -> 해결
-   - edit.html에서 text대신 textarea로 받아보기 -> 해결
-   - view.html에서 본문 textarea를 수정안되게 만들 수 있는 지 확인해보기 -> 해결
+- board delete했을 때 해당 url로 갈 수 있으므 -> '삭제된 게시물입니다.'alert띄워보기 -> 해결
+- edit.html에서 text대신 textarea로 받아보기 -> 해결
+- view.html에서 본문 textarea를 수정안되게 만들 수 있는 지 확인해보기 -> 해결
+- paging 게시물 수에 따라 번호 나타나기
+
+## 추가하고 싶은 기능
+- 검색 기능 (드롭바 이용해서 제목, 글쓴이, 지역에 따라 다르게 검색 가능하게 하기)
